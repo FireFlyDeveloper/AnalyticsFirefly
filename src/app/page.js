@@ -1,5 +1,5 @@
+import { HeaderView } from "./header";
+
 export default function Home() {
-  return (
-    <h1>AnalyticsFirefly</h1>
-  );
+  return <HeaderView />;
 }
