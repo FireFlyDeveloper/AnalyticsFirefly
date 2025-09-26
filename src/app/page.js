@@ -5,9 +5,9 @@ import { MainView } from "./main";
 export default function Home() {
   return (
     <>
-      <HeaderView />;
+      <HeaderView />
       <MainView />
-      <FooterView />;
+      <FooterView />
     </>
   );
 }
