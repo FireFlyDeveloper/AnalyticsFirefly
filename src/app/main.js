@@ -15,7 +15,7 @@ export function MainView() {
                             <span className="text-2xl">🚀</span>
                         </div>
                         <h2
-                            className="text-3xl font-bold text-gray-800 mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text">
+                            className="text-3xl font-bold text-gray-800/0 mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text">
                             Transform Your Data Into Insights</h2>
                         <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">Upload your Excel files and let
                             our advanced AI analyze your data to generate comprehensive reports with actionable insights and
