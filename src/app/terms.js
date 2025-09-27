@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, { useEffect } from "react";
 
@@ -80,9 +80,15 @@ export function TermsView({ isOpen, onClose }) {
               3. Data Privacy & Security
             </h3>
             <ul className="text-gray-600 mb-4 space-y-2">
-              <li>• Your uploaded files are processed securely and are not stored permanently</li>
+              <li>
+                • Your uploaded files are processed securely and are not stored
+                permanently
+              </li>
               <li>• We do not share your data with third parties</li>
-              <li>• All data transmission is encrypted using industry-standard protocols</li>
+              <li>
+                • All data transmission is encrypted using industry-standard
+                protocols
+              </li>
               <li>• Generated reports are your intellectual property</li>
             </ul>
 
