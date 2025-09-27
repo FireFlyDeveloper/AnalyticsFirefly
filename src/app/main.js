@@ -1,7 +1,6 @@
 export function MainView() {
   return (
     <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-6 sm:py-8">
-      {/* Hero Section */}
       <div className="mb-6 sm:mb-8">
         <div className="glass-effect rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 card-shadow relative overflow-hidden">
           <div className="absolute inset-0 opacity-5">
@@ -40,9 +39,7 @@ export function MainView() {
         </div>
       </div>
 
-      {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-6 sm:mb-8">
-        {/* Upload Section */}
         <div className="lg:col-span-2">
           <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 card-shadow relative overflow-hidden">
             <div className="absolute top-0 right-0 w-20 sm:w-24 md:w-32 h-20 sm:h-24 md:h-32 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full -translate-y-8 sm:-translate-y-12 md:-translate-y-16 translate-x-8 sm:translate-x-12 md:translate-x-16 opacity-50"></div>
@@ -151,7 +148,6 @@ export function MainView() {
           </div>
         </div>
 
-        {/* Sidebar Sections */}
         <div className="space-y-4 sm:space-y-6">
           {/* AI Features */}
           <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 card-shadow relative overflow-hidden">
@@ -222,7 +218,6 @@ export function MainView() {
             </div>
           </div>
 
-          {/* Supported Formats */}
           <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 card-shadow relative overflow-hidden">
             <div className="absolute bottom-0 left-0 w-10 sm:w-12 md:w-16 h-10 sm:h-12 md:h-16 bg-gradient-to-tr from-blue-100 to-indigo-100 rounded-full translate-y-4 sm:translate-y-6 md:translate-y-8 -translate-x-4 sm:-translate-x-6 md:-translate-x-8 opacity-50"></div>
             <div className="relative z-10">
@@ -267,7 +262,6 @@ export function MainView() {
             </div>
           </div>
 
-          {/* How It Works */}
           <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 card-shadow border border-indigo-100">
             <div className="flex items-center mb-3 sm:mb-4">
               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-md sm:rounded-lg flex items-center justify-center mr-2 sm:mr-3 shadow-lg">
@@ -301,7 +295,6 @@ export function MainView() {
         </div>
       </div>
 
-      {/* Results Section */}
       <div id="resultsSection" className="hidden">
         <div className="slide-up">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 gap-3">
