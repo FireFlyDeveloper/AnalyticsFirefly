@@ -31,7 +31,7 @@ export async function POST(req) {
     );
 
     const response = await fetch(
-      "http://localhost:5678/webhook-test/3287b7e2-fae5-45cc-98b4-28ec3242412e",
+      "http://localhost:5678/webhook/3287b7e2-fae5-45cc-98b4-28ec3242412e",
       {
         method: "POST",
         body: formData,

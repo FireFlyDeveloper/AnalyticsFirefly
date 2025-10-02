@@ -1,4 +1,34 @@
+'use client';
+import { useEffect, useRef, useState } from "react";
+import { useFileUploader } from "../../../hooks/useFileUploader";
+
+const STAGES = [
+  "Uploading",
+  "Extracting",
+  "Summarizing",
+  "Thinking",
+  "AI",
+  "Deleting",
+];
+
 export function MainView() {
+  const { logs, uploading, status, uploadFile } = useFileUploader();
+  const fileInputRef = useRef(null);
+
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    if (!status) {
+      setProgress(0);
+      return;
+    }
+    const idx = STAGES.indexOf(status);
+    if (idx >= 0) {
+      const percentage = Math.round(((idx + 1) / STAGES.length) * 100);
+      setProgress(percentage);
+    }
+  }, [status]);
+
   return (
     <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-6 sm:py-8">
       <div className="mb-6 sm:mb-8">
@@ -46,110 +76,102 @@ export function MainView() {
             <div className="absolute bottom-0 left-0 w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 bg-gradient-to-tr from-indigo-100 to-pink-100 rounded-full translate-y-6 sm:translate-y-8 md:translate-y-12 -translate-x-6 sm:-translate-x-8 md:-translate-x-12 opacity-50"></div>
 
             <div className="relative z-10">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 gap-3">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-3">
                 <h3 className="text-lg sm:text-xl font-semibold text-gray-800 flex items-center">
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg sm:rounded-xl flex items-center justify-center mr-2 sm:mr-3 shadow-lg">
-                    <span className="text-white text-sm sm:text-base">📊</span>
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center mr-3 shadow-lg">
+                    <span className="text-white text-base">📊</span>
                   </div>
                   Upload Your Data
                 </h3>
+
                 <div className="flex items-center space-x-2 text-xs bg-gray-50 px-3 py-1 rounded-full">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span>Ready to analyze</span>
+                  <div
+                    className={`w-2 h-2 rounded-full ${status ? "bg-yellow-500" : "bg-green-500"
+                      }`}
+                  ></div>
+                  <span>{status || "Ready to analyze"}</span>
                 </div>
               </div>
 
               <div
-                id="uploadArea"
-                className="upload-area rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 lg:p-12 text-center cursor-pointer relative overflow-hidden"
+                className={`upload-area rounded-xl p-6 md:p-10 text-center relative overflow-hidden glass-effect ${status ? "cursor-not-allowed opacity-70" : "cursor-pointer"
+                  }`}
               >
                 <input
                   type="file"
-                  id="fileInput"
+                  ref={fileInputRef}
                   accept=".xlsx,.xls"
                   className="hidden"
+                  disabled={!!status} // disable file input when processing
+                  onChange={(e) => uploadFile(e.target.files?.[0] || null)}
                 />
 
-                <div className="absolute inset-0 opacity-5">
-                  <div className="absolute top-2 sm:top-4 left-2 sm:left-4 w-6 sm:w-8 h-6 sm:h-8 border-2 border-blue-400 rounded rotate-45"></div>
-                  <div className="absolute top-4 sm:top-8 right-4 sm:right-8 w-4 sm:w-6 h-4 sm:h-6 border-2 border-purple-400 rounded-full"></div>
-                  <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-8 w-3 sm:w-4 h-3 sm:h-4 bg-indigo-400 rounded"></div>
-                  <div className="absolute bottom-2 sm:bottom-4 right-8 sm:right-12 w-2 sm:w-3 h-2 sm:h-3 bg-pink-400 rounded-full"></div>
-                </div>
-
-                <div id="uploadContent" className="relative z-10">
-                  <div className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-gradient-to-r from-blue-100 to-purple-100 rounded-xl sm:rounded-2xl mb-4 sm:mb-6 shadow-inner">
-                    <span className="text-2xl sm:text-3xl md:text-4xl">📈</span>
+                {!status ? (
+                  <div className="relative z-10 fade-in">
+                    <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-100 to-purple-100 rounded-2xl mb-6 shadow-inner">
+                      <span className="text-4xl">📈</span>
+                    </div>
+                    <h4 className="text-lg sm:text-xl font-semibold text-gray-700 mb-2">
+                      Drop your Excel files here
+                    </h4>
+                    <p className="text-gray-500 mb-6 max-w-md mx-auto text-sm sm:text-base">
+                      Drag & drop your Excel files or click to browse. Our AI will analyze
+                      your data and generate insights.
+                    </p>
+                    <button
+                      onClick={() => fileInputRef.current?.click()}
+                      disabled={!!status}
+                      className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 transform shadow-lg ${status
+                          ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                          : "bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white hover:scale-105 hover:shadow-xl"
+                        }`}
+                    >
+                      📁 Choose Excel Files
+                    </button>
                   </div>
-                  <h4 className="text-lg sm:text-xl font-semibold text-gray-700 mb-2 sm:mb-3">
-                    Drop your Excel files here
-                  </h4>
-                  <p className="text-gray-500 mb-4 sm:mb-6 max-w-md mx-auto text-sm sm:text-base">
-                    Drag and drop your Excel files or click to browse. Our AI
-                    will analyze your data and generate comprehensive insights.
-                  </p>
-
-                  <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mb-4 sm:mb-6 text-xs sm:text-sm text-gray-400">
-                    <div className="flex items-center space-x-1">
-                      <span>📊</span>
-                      <span>.xlsx</span>
-                    </div>
-                    <div className="w-1 h-1 bg-gray-300 rounded-full hidden sm:block"></div>
-                    <div className="flex items-center space-x-1">
-                      <span>📋</span>
-                      <span>.xls</span>
-                    </div>
-                    <div className="w-1 h-1 bg-gray-300 rounded-full hidden sm:block"></div>
-                    <div className="flex items-center space-x-1">
-                      <span>⚡</span>
-                      <span>Up to 10MB</span>
-                    </div>
-                  </div>
-
-                  <button
-                    id="browseBtn"
-                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 sm:px-6 md:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-xl shadow-lg w-full sm:w-auto"
-                  >
-                    <span className="flex items-center justify-center sm:justify-start space-x-2 sm:space-x-3 text-sm sm:text-base">
-                      <span className="text-base sm:text-lg">📁</span>
-                      <span>Choose Excel Files</span>
-                      <span className="text-xs sm:text-sm opacity-75 hidden sm:block">
-                        or drag & drop
+                ) : (
+                  <div className="relative z-10 fade-in">
+                    <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-yellow-100 to-orange-100 rounded-2xl mb-6 shadow-inner bounce-in">
+                      <span className="text-4xl animate-bounce">
+                        {status === "Uploading" && "📤"}
+                        {status === "Extracting" && "🔍"}
+                        {status === "Summarizing" && "✍️"}
+                        {status === "Thinking" && "🤔"}
+                        {status === "AI" && "🤖"}
+                        {status === "Deleting" && "❌"}
+                        {!status && "⚡"}
                       </span>
-                    </span>
-                  </button>
-                </div>
+                    </div>
 
-                <div id="uploadProgress" className="hidden relative z-10">
-                  <div className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-gradient-to-r from-yellow-100 to-orange-100 rounded-xl sm:rounded-2xl mb-4 sm:mb-6 shadow-inner">
-                    <span className="text-2xl sm:text-3xl md:text-4xl animate-bounce">
-                      ⚡
-                    </span>
-                  </div>
-                  <h4 className="text-lg sm:text-xl font-semibold text-gray-700 mb-3 sm:mb-4">
-                    Analyzing your data with AI...
-                  </h4>
-                  <div className="max-w-md mx-auto">
-                    <div className="w-full bg-gray-200 rounded-full h-3 sm:h-4 mb-3 sm:mb-4 overflow-hidden">
-                      <div className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 h-full rounded-full animate-pulse shadow-inner w-70"></div>
+                    <h4 className="text-lg sm:text-xl font-semibold text-gray-700 mb-4">
+                      {status === "AI"
+                        ? "Finalizing AI Report..."
+                        : status
+                          ? `${status}...`
+                          : "Analyzing your data with AI..."}
+                    </h4>
+
+                    <div className="max-w-md mx-auto">
+                      <div className="w-full bg-gray-200 rounded-full h-4 mb-4 overflow-hidden">
+                        <div
+                          className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 h-full rounded-full shadow-inner transition-all duration-700 ease-out"
+                          style={{ width: `${progress}%` }}
+                        ></div>
+                      </div>
+                      <div className="flex justify-between text-xs sm:text-sm text-gray-500">
+                        <span>{status || "Processing..."}</span>
+                        <span>{progress}%</span>
+                      </div>
                     </div>
-                    <div className="flex justify-between text-xs sm:text-sm text-gray-500">
-                      <span>Processing data...</span>
-                      <span>70%</span>
-                    </div>
                   </div>
-                  <p className="text-xs sm:text-sm text-gray-400 mt-3 sm:mt-4">
-                    Our AI is extracting insights from your data. This may take
-                    a few moments.
-                  </p>
-                </div>
+                )}
               </div>
             </div>
+
           </div>
         </div>
 
         <div className="space-y-4 sm:space-y-6">
-          {/* AI Features */}
           <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 card-shadow relative overflow-hidden">
             <div className="absolute top-0 right-0 w-12 sm:w-16 md:w-20 h-12 sm:h-16 md:h-20 bg-gradient-to-br from-green-100 to-emerald-100 rounded-full -translate-y-6 sm:-translate-y-8 md:-translate-y-10 translate-x-6 sm:translate-x-8 md:translate-x-10 opacity-50"></div>
             <div className="relative z-10">
