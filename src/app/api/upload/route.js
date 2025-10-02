@@ -17,7 +17,7 @@ export async function POST(req) {
     if (!["xlsx", "xls"].includes(ext)) {
       return NextResponse.json(
         { error: "Only .xlsx and .xls files are allowed" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -27,7 +27,7 @@ export async function POST(req) {
     formData.append(
       "fileType",
       file.type ||
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     );
 
     const response = await fetch(
@@ -35,13 +35,13 @@ export async function POST(req) {
       {
         method: "POST",
         body: formData,
-      }
+      },
     );
 
     if (!response.ok) {
       return NextResponse.json(
         { error: `Upload failed: ${response.status} ${response.statusText}` },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -65,7 +65,10 @@ export async function POST(req) {
           if (data?.type === "item") {
             const filtered = {
               content: data.content,
-              node: data.metadata?.nodeName === "AI Agent" ? "AI" : data.metadata?.nodeName,
+              node:
+                data.metadata?.nodeName === "AI Agent"
+                  ? "AI"
+                  : data.metadata?.nodeName,
             };
             stream.push(JSON.stringify(filtered) + "\n");
           }

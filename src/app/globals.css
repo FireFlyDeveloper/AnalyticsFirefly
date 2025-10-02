@@ -12,6 +12,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
 }
+
 main {
   flex: 1;
 }
@@ -185,4 +186,40 @@ main {
 .glass-effect {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
+}
+
+#reportContent table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 20px;
+}
+
+th {
+  text-align: left;
+}
+
+table {
+  border-spacing: 5px;
+  margin-bottom: 30;
+}
+
+#reportContent h3 {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+#reportContent p,
+ul {
+  margin-bottom: 30px;
+}
+
+ul {
+  list-style-type: disc;
+  padding-left: 20px;
 }

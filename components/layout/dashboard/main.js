@@ -1,6 +1,14 @@
-'use client';
-import { useEffect, useRef, useState } from "react";
+"use client";
+import { useMemo, useEffect, useRef, useState } from "react";
 import { useFileUploader } from "../../../hooks/useFileUploader";
+import markdownit from "markdown-it";
+
+const md = markdownit({
+  html: true,
+  linkify: true,
+  typographer: true,
+  breaks: true,
+});
 
 const STAGES = [
   "Uploading",
@@ -14,8 +22,13 @@ const STAGES = [
 export function MainView() {
   const { logs, uploading, status, uploadFile } = useFileUploader();
   const fileInputRef = useRef(null);
+  const bottomRef = useRef(null);
 
   const [progress, setProgress] = useState(0);
+
+  const renderedLogs = useMemo(() => {
+    return md.render(logs.join(""));
+  }, [logs]);
 
   useEffect(() => {
     if (!status) {
@@ -28,6 +41,21 @@ export function MainView() {
       setProgress(percentage);
     }
   }, [status]);
+
+  useEffect(() => {
+    if (uploading && logs.length > 0 && bottomRef.current) {
+      const resultsSection = document.getElementById("resultsSection");
+      resultsSection.classList.remove("hidden");
+
+      const el = bottomRef.current;
+      const rect = el.getBoundingClientRect();
+      const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+
+      if (!isVisible) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [logs, uploading]);
 
   return (
     <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-6 sm:py-8">
@@ -86,16 +114,18 @@ export function MainView() {
 
                 <div className="flex items-center space-x-2 text-xs bg-gray-50 px-3 py-1 rounded-full">
                   <div
-                    className={`w-2 h-2 rounded-full ${status ? "bg-yellow-500" : "bg-green-500"
-                      }`}
+                    className={`w-2 h-2 rounded-full ${
+                      status ? "bg-yellow-500" : "bg-green-500"
+                    }`}
                   ></div>
                   <span>{status || "Ready to analyze"}</span>
                 </div>
               </div>
 
               <div
-                className={`upload-area rounded-xl p-6 md:p-10 text-center relative overflow-hidden glass-effect ${status ? "cursor-not-allowed opacity-70" : "cursor-pointer"
-                  }`}
+                className={`upload-area rounded-xl p-6 md:p-10 text-center relative overflow-hidden glass-effect ${
+                  status ? "cursor-not-allowed opacity-70" : "cursor-pointer"
+                }`}
               >
                 <input
                   type="file"
@@ -115,16 +145,17 @@ export function MainView() {
                       Drop your Excel files here
                     </h4>
                     <p className="text-gray-500 mb-6 max-w-md mx-auto text-sm sm:text-base">
-                      Drag & drop your Excel files or click to browse. Our AI will analyze
-                      your data and generate insights.
+                      Drag & drop your Excel files or click to browse. Our AI
+                      will analyze your data and generate insights.
                     </p>
                     <button
                       onClick={() => fileInputRef.current?.click()}
                       disabled={!!status}
-                      className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 transform shadow-lg ${status
+                      className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 transform shadow-lg ${
+                        status
                           ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                           : "bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white hover:scale-105 hover:shadow-xl"
-                        }`}
+                      }`}
                     >
                       📁 Choose Excel Files
                     </button>
@@ -167,7 +198,6 @@ export function MainView() {
                 )}
               </div>
             </div>
-
           </div>
         </div>
 
@@ -337,8 +367,10 @@ export function MainView() {
             <div className="document-content page-lines">
               <div
                 id="reportContent"
-                className="prose prose-sm sm:prose-lg max-w-none text-gray-800 leading-relaxed"
-              ></div>
+                dangerouslySetInnerHTML={{ __html: renderedLogs }}
+                className="overflow-y-auto"
+              />
+              <div ref={bottomRef} />
             </div>
           </div>
         </div>
