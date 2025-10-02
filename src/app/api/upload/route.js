@@ -65,7 +65,7 @@ export async function POST(req) {
           if (data?.type === "item") {
             const filtered = {
               content: data.content,
-              node: data.metadata?.nodeName,
+              node: data.metadata?.nodeName === "AI Agent" ? "AI" : data.metadata?.nodeName,
             };
             stream.push(JSON.stringify(filtered) + "\n");
           }
