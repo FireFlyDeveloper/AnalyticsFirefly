@@ -111,16 +111,16 @@ export function FooterView() {
                   </button>
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    className="hover:text-white transition-colors duration-300"
+                  <button
+                    onClick={() => openModal("security")}
+                    className="hover:text-white transition-colors duration-300 cursor-pointer"
                   >
                     Data Security
-                  </a>
+                  </button>
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="mailto:firefly@fireflylab.top"
                     className="hover:text-white transition-colors duration-300"
                   >
                     Contact
@@ -145,7 +145,11 @@ export function FooterView() {
         </div>
       </footer>
 
-      <TermsView isOpen={modalOpen} onClose={() => setModalOpen(false)} view={modalView} />
+      <TermsView
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        view={modalView}
+      />
     </>
   );
 }
