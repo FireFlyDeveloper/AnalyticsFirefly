@@ -135,10 +135,6 @@ export function FooterView() {
               © 2025 AnalyticsFirefly. All rights reserved.
             </p>
             <div className="flex items-center space-x-6 mt-4 md:mt-0 text-sm text-gray-400">
-              <span className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span>All systems operational</span>
-              </span>
               <span>Made with ❤️ by FireFlyDeveloper</span>
             </div>
           </div>
