@@ -43,7 +43,7 @@ export function MainView() {
   }, [status]);
 
   useEffect(() => {
-    if (uploading && logs.length > 0 && bottomRef.current) {
+    if (uploading && status === "AI" && logs.length > 0 && bottomRef.current) {
       const resultsSection = document.getElementById("resultsSection");
       resultsSection.classList.remove("hidden");
 
@@ -55,7 +55,7 @@ export function MainView() {
         el.scrollIntoView({ behavior: "smooth" });
       }
     }
-  }, [logs, uploading]);
+  }, [status]);
 
   return (
     <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-6 sm:py-8">
@@ -355,7 +355,7 @@ export function MainView() {
 
       <div id="resultsSection" className="hidden">
         <div className="slide-up">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 gap-3">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 gap-3" ref={bottomRef}>
             <h3 className="text-xl sm:text-2xl font-bold text-gray-800 flex items-center bounce-in">
               <span className="mr-2 sm:mr-3 text-2xl sm:text-3xl">📊</span>
               Analysis Results
@@ -376,7 +376,6 @@ export function MainView() {
                 dangerouslySetInnerHTML={{ __html: renderedLogs }}
                 className="lg:p-15 md:p-10 sm:p-0"
               />
-              <div ref={bottomRef} />
             </div>
           </div>
         </div>
