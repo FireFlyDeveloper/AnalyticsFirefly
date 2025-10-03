@@ -83,7 +83,7 @@ export function FooterView() {
                 <li>
                   <a
                     href="https://ko-fi.com/fireflydeveloper"
-                    className="hover:text-white transition-colors duration-300"
+                    className="hover:text-white transition-colors duration-300 cursor-pointer"
                   >
                     Support
                   </a>
@@ -121,7 +121,7 @@ export function FooterView() {
                 <li>
                   <a
                     href="mailto:firefly@fireflylab.top"
-                    className="hover:text-white transition-colors duration-300"
+                    className="hover:text-white transition-colors duration-300 cursor-pointer"
                   >
                     Contact
                   </a>
