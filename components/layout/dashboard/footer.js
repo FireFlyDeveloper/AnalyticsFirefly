@@ -4,7 +4,13 @@ import React, { useState } from "react";
 import { TermsView } from "./terms";
 
 export function FooterView() {
-  const [showTerms, setShowTerms] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalView, setModalView] = useState("terms");
+
+  const openModal = (view) => {
+    setModalView(view);
+    setModalOpen(true);
+  };
 
   return (
     <>
@@ -90,19 +96,19 @@ export function FooterView() {
               <ul className="space-y-2 text-sm text-gray-300">
                 <li>
                   <button
-                    onClick={() => setShowTerms(true)}
+                    onClick={() => openModal("terms")}
                     className="hover:text-white transition-colors duration-300 cursor-pointer"
                   >
                     Terms & Conditions
                   </button>
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    className="hover:text-white transition-colors duration-300"
+                  <button
+                    onClick={() => openModal("privacy")}
+                    className="hover:text-white transition-colors duration-300 cursor-pointer"
                   >
                     Privacy Policy
-                  </a>
+                  </button>
                 </li>
                 <li>
                   <a
@@ -139,7 +145,7 @@ export function FooterView() {
         </div>
       </footer>
 
-      <TermsView isOpen={showTerms} onClose={() => setShowTerms(false)} />
+      <TermsView isOpen={modalOpen} onClose={() => setModalOpen(false)} view={modalView} />
     </>
   );
 }
