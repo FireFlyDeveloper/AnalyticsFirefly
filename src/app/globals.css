@@ -234,3 +234,26 @@ main {
   list-style-type: decimal;
   padding-left: 20px;
 }
+
+@media print {
+  @page {
+    margin: 0.5in;
+  }
+
+  #reportContent {
+    margin: 0.5in !important;
+  }
+
+  h1, h2, h3, h4 {
+    page-break-after: avoid;
+  }
+
+  table, figure {
+    page-break-inside: avoid;
+  }
+
+  p, li {
+    widows: 3;
+    orphans: 3;
+  }
+}

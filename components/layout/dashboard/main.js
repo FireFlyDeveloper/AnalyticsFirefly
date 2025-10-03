@@ -2,6 +2,7 @@
 import { useMemo, useEffect, useRef, useState } from "react";
 import { useFileUploader } from "../../../hooks/useFileUploader";
 import markdownit from "markdown-it";
+import { useReactToPrint } from "react-to-print";
 
 const md = markdownit({
   html: true,
@@ -23,6 +24,8 @@ export function MainView() {
   const { logs, uploading, status, uploadFile } = useFileUploader();
   const fileInputRef = useRef(null);
   const bottomRef = useRef(null);
+  const contentRef = useRef(null);
+  const reactToPrintFn = useReactToPrint({ contentRef });
 
   const [progress, setProgress] = useState(0);
 
@@ -361,6 +364,7 @@ export function MainView() {
               Analysis Results
             </h3>
             <button
+              onClick={reactToPrintFn}
               id="downloadBtn"
               className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl font-medium transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 pulse-glow w-full sm:w-auto"
             >
@@ -372,6 +376,7 @@ export function MainView() {
           <div className="document-container">
             <div className="document-content page-lines">
               <div
+                ref={contentRef}
                 id="reportContent"
                 dangerouslySetInnerHTML={{ __html: renderedLogs }}
                 className="lg:p-15 md:p-10 sm:p-0"
