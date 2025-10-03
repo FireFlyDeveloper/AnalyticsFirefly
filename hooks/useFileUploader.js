@@ -9,6 +9,12 @@ export function useFileUploader() {
   async function uploadFile(file) {
     if (!file) return;
 
+    const MAX_SIZE = 10 * 1024 * 1024; // 10MB
+    if (file.size > MAX_SIZE) {
+      setStatus("File too large (max 10MB)");
+      return;
+    }
+
     setLogs([]);
     setUploading(true);
     setStatus("Uploading");

@@ -76,7 +76,7 @@ export function FooterView() {
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="https://ko-fi.com/fireflydeveloper"
                     className="hover:text-white transition-colors duration-300"
                   >
                     Support
