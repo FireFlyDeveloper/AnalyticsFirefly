@@ -215,11 +215,11 @@ table {
 }
 
 #reportContent p,
-ul {
+#reportContent ul {
   margin-bottom: 30px;
 }
 
-ul {
+#reportContent ul {
   list-style-type: disc;
   padding-left: 20px;
 }
