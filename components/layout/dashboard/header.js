@@ -8,10 +8,10 @@ export function HeaderView() {
   useEffect(() => {
     async function fetchFilesAnalyzed() {
       try {
-        const response = await fetch("/api/files-analyzed");
+        const response = await fetch("/api/total");
         if (!response.ok) throw new Error("Failed to fetch");
         const data = await response.json();
-        setFilesAnalyzed(data.count);
+        setFilesAnalyzed(data.total || 0);
       } catch (error) {
         console.error("Error fetching files analyzed:", error);
         setFilesAnalyzed(0);
