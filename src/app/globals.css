@@ -188,6 +188,10 @@ main {
   backdrop-filter: blur(10px);
 }
 
+#reportContent {
+  overflow-x: auto;
+}
+
 #reportContent table,
 #reportContent th,
 #reportContent td {
@@ -197,7 +201,7 @@ main {
 
 #reportContent th,
 #reportContent td {
-  padding: 20px;
+  padding: 10px;
 }
 
 #reportContent th {
@@ -206,7 +210,7 @@ main {
 
 #reportContent table {
   border-spacing: 5px;
-  margin-bottom: 30;
+  margin-bottom: 30px;
 }
 
 #reportContent h3 {
