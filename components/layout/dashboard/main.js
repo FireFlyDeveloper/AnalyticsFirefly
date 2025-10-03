@@ -202,7 +202,10 @@ export function MainView() {
         </div>
 
         <div className="space-y-4 sm:space-y-6">
-          <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 card-shadow relative overflow-hidden">
+          <div
+            className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 card-shadow relative overflow-hidden"
+            id="features"
+          >
             <div className="absolute top-0 right-0 w-12 sm:w-16 md:w-20 h-12 sm:h-16 md:h-20 bg-gradient-to-br from-green-100 to-emerald-100 rounded-full -translate-y-6 sm:-translate-y-8 md:-translate-y-10 translate-x-6 sm:translate-x-8 md:translate-x-10 opacity-50"></div>
             <div className="relative z-10">
               <div className="flex items-center mb-3 sm:mb-4">
@@ -314,7 +317,10 @@ export function MainView() {
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 card-shadow border border-indigo-100">
+          <div
+            className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 card-shadow border border-indigo-100"
+            id="how-it-works"
+          >
             <div className="flex items-center mb-3 sm:mb-4">
               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-md sm:rounded-lg flex items-center justify-center mr-2 sm:mr-3 shadow-lg">
                 <span className="text-white text-xs sm:text-sm">🔄</span>

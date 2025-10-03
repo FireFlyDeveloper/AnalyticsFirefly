@@ -58,16 +58,16 @@ export function FooterView() {
               <ul className="space-y-2 text-sm text-gray-300">
                 <li>
                   <a
-                    href="#"
-                    className="hover:text-white transition-colors duration-300"
+                    href="#how-it-works"
+                    className="hover:text-white transition-colors duration-300 cursor-pointer"
                   >
                     How It Works
                   </a>
                 </li>
                 <li>
                   <a
-                    href="#"
-                    className="hover:text-white transition-colors duration-300"
+                    href="#features"
+                    className="hover:text-white transition-colors duration-300 cursor-pointer"
                   >
                     Features
                   </a>
@@ -75,7 +75,7 @@ export function FooterView() {
                 <li>
                   <a
                     href="#"
-                    className="hover:text-white transition-colors duration-300"
+                    className="hover:text-white transition-colors duration-300 cursor-pointer"
                   >
                     Pricing
                   </a>
