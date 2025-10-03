@@ -241,7 +241,8 @@ main {
   }
 
   #reportContent {
-    margin: 0.5in !important;
+    margin: 0.4in !important;
+    margin-top: 0 !important;
   }
 
   h1, h2, h3, h4 {
