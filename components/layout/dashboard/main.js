@@ -368,7 +368,7 @@ export function MainView() {
               <div
                 id="reportContent"
                 dangerouslySetInnerHTML={{ __html: renderedLogs }}
-                className="overflow-y-auto"
+                className="lg:p-15 md:p-10 sm:p-0"
               />
               <div ref={bottomRef} />
             </div>

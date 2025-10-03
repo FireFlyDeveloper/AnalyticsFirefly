@@ -189,22 +189,22 @@ main {
 }
 
 #reportContent table,
-th,
-td {
+#reportContent th,
+#reportContent td {
   border: 1px solid black;
   border-collapse: collapse;
 }
 
-th,
-td {
+#reportContent th,
+#reportContent td {
   padding: 20px;
 }
 
-th {
+#reportContent th {
   text-align: left;
 }
 
-table {
+#reportContent table {
   border-spacing: 5px;
   margin-bottom: 30;
 }
@@ -215,11 +215,17 @@ table {
 }
 
 #reportContent p,
-#reportContent ul {
+#reportContent ul,
+#reportContent ol {
   margin-bottom: 30px;
 }
 
 #reportContent ul {
   list-style-type: disc;
+  padding-left: 20px;
+}
+
+#reportContent ol {
+  list-style-type: decimal;
   padding-left: 20px;
 }
