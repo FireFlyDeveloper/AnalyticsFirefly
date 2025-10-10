@@ -29,9 +29,11 @@ export async function POST(req) {
       file.type ||
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     );
+    formData.append("github", "https://github.com/FireFlyDeveloper");
+    formData.append("developer", "This api is owned by FireFlyDeveloper");
 
     const response = await fetch(
-      "http://localhost:5678/webhook/3287b7e2-fae5-45cc-98b4-28ec3242412e",
+      "https://n8n.fireflylab.top/webhook/3287b7e2-fae5-45cc-98b4-28ec3242412e",
       {
         method: "POST",
         body: formData,

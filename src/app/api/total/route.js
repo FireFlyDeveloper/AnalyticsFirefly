@@ -1,6 +1,6 @@
 export async function GET() {
     try {
-        const response = await fetch('http://localhost:5678/webhook/a79fe01d-81f8-457b-bdb3-4bd746d24eef');
+        const response = await fetch('https://n8n.fireflylab.top/webhook/a79fe01d-81f8-457b-bdb3-4bd746d24eef');
         if (!response.ok) {
             throw new Error(`Failed to fetch: ${response.status} ${response.statusText}`);
         }
