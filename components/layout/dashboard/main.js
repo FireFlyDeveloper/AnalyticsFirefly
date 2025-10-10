@@ -358,7 +358,10 @@ export function MainView() {
 
       <div id="resultsSection" className="hidden">
         <div className="slide-up">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 gap-3" ref={bottomRef}>
+          <div
+            className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 gap-3"
+            ref={bottomRef}
+          >
             <h3 className="text-xl sm:text-2xl font-bold text-gray-800 flex items-center bounce-in">
               <span className="mr-2 sm:mr-3 text-2xl sm:text-3xl">📊</span>
               Analysis Results
