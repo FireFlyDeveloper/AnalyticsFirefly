@@ -10,7 +10,7 @@ export async function GET() {
     }
     const data = await response.json();
     return Response.json({ total: data.files_analyzed || 0 });
-  } catch (error) {
+  } catch (err) {
     return Response.json({ error: err.message }, { status: 500 });
   }
 }
